@@ -73,5 +73,5 @@ def process_and_rename_images(folder_path):
                 print(f"Error processing {filename}: {str(e)}")
 
 # Use the function
-folder_path = "/Users/muhammedsamal/Documents/cleanshot/"  # Update this path
+folder_path = "/path/to/your_folder"  # Update this path
 process_and_rename_images(folder_path)
