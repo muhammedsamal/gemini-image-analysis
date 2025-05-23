@@ -3,6 +3,16 @@ import google.generativeai as genai
 
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 
+def get_mime_type(extension):
+    """Get the appropriate MIME type for the given file extension."""
+    mime_types = {
+        '.jpg': 'image/jpeg',
+        '.jpeg': 'image/jpeg',
+        '.png': 'image/png',
+        '.webp': 'image/webp'
+    }
+    return mime_types.get(extension.lower(), 'image/jpeg')
+
 def upload_to_gemini(path, mime_type=None):
     """Uploads the given file to Gemini."""
     file = genai.upload_file(path, mime_type=mime_type)
@@ -22,7 +32,8 @@ def get_suggested_filename(response_text):
 
 def process_and_rename_images(folder_path):
     """Process images and rename them based on AI suggestions."""
-    supported_formats = ('.png', '.jpeg', '.jpg')
+    # Added WebP support
+    supported_formats = ('.png', '.jpeg', '.jpg', '.webp')
 
     generation_config = {
         "temperature": 0.7,  # Reduced temperature for more focused responses
@@ -45,7 +56,10 @@ def process_and_rename_images(folder_path):
             extension = os.path.splitext(filename)[1].lower()
 
             try:
-                uploaded_file = upload_to_gemini(file_path, mime_type="image/jpeg" if extension in ['.jpg', '.jpeg'] else "image/png")
+                # Use the new get_mime_type function for proper MIME type detection
+                mime_type = get_mime_type(extension)
+                uploaded_file = upload_to_gemini(file_path, mime_type=mime_type)
+                
                 chat_session = model.start_chat()
                 response = chat_session.send_message([
                     "Analyze this image and respond with a single descriptive filename (no explanations, no bullets).",
