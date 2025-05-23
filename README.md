@@ -74,7 +74,8 @@ A powerful Python script that leverages Google's Gemini AI to automatically anal
 📁 my-photos/
 ├── IMG_001.jpg
 ├── DSC_0234.png
-└── photo.jpeg
+├── photo.jpeg
+└── image.webp
 ```
 
 **After:**
@@ -82,7 +83,8 @@ A powerful Python script that leverages Google's Gemini AI to automatically anal
 📁 my-photos/
 ├── golden-retriever-playing-fetch-park.jpg
 ├── sunset-mountain-landscape-silhouette.png
-└── family-dinner-birthday-celebration.jpeg
+├── family-dinner-birthday-celebration.jpeg
+└── modern-city-skyline-night-lights.webp
 ```
 
 ## 🎛️ Configuration
@@ -109,8 +111,9 @@ generation_config = {
 
 - **PNG** (`.png`)
 - **JPEG** (`.jpg`, `.jpeg`)
+- **WebP** (`.webp`) ✨ **NEW!**
 
-> **Note**: The script can be easily extended to support additional formats like WebP, GIF, or TIFF by modifying the `supported_formats` tuple.
+> **Note**: The script can be easily extended to support additional formats like GIF or TIFF by modifying the `supported_formats` tuple and adding appropriate MIME types.
 
 ## 🔧 Advanced Configuration
 
